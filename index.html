@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta name="viewport" content="width=
+    , initial-scale=1.0"> -->
+    <title>JavaScript_Hovering Scale</title>
+
+    <style>
+        body{
+            overflow: hidden;
+        }
+        .container{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+           
+        }
+        .container img{
+            height: 190px;
+            margin: 10px;
+            transition: .2s ease-in-out
+        }
+        .container img:hover{
+           opacity: .5;
+           cursor: zoom-out;
+        }
+        .alt{
+            position: absolute;
+            height: 300px;
+            /* width: 300px; */
+            transition: .5s ease-out
+        }
+    </style>
+</head> 
+<body>
+<div class="container">
+    <img class="" src="./1.jpeg" alt="">
+    <img class="" src="./2.jpeg" alt="">
+    <img class="" src="./3.jpg" alt="">
+    <img class="" src="./4.jpg" alt="">
+</div>
+
+ 
+
+
+<script>
+var allImg = document.querySelectorAll('.container img')
+var copy;
+allImg.forEach(img => {
+img.addEventListener("mouseenter", (e) => {
+        copy = e.target.cloneNode(true);
+        copy.classList.add('alt')
+        copy.style.top = e.y+'px';
+        copy.style.left = e.x+'px';
+        document.body.appendChild(copy)
+//   console.log(e.target)
+    })
+    img.addEventListener("mousemove", (e) => {
+        copy.style.top = e.y+20+'px';
+        copy.style.left = e.x+20+'px';
+    })
+    img.addEventListener("mouseleave", () => {
+        document.body.removeChild(copy)
+    })
+});
+
+</script>
+</body>
+</html>
